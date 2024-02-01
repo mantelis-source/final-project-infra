@@ -45,7 +45,7 @@ resource "aws_ecs_service" "ecs_service" {
     target_group_arn = aws_lb_target_group.app_lb_target_group.arn
   }
   network_configuration {
-    assign_public_ip = true
+    assign_public_ip = false
     security_groups = var.lb_security_groups
     subnets = var.lb_subnets
   }
