@@ -2,7 +2,7 @@ resource "aws_ecs_cluster" "ecs_cluster" {
   name = "ecs_cluster"
 
   tags = {
-    Name = join(" ", [var.vpc_name, "ECS cluster"])
+    Name = join(" ", [var.environment_name, "ECS cluster"])
   }
 }
 resource "aws_ecs_task_definition" "ecs_task_def" {
@@ -20,7 +20,7 @@ resource "aws_ecs_task_definition" "ecs_task_def" {
         cpu: 256,
         memory: 1024,
         essential: true,
-        portMapping: [
+        portMappings: [
             {
                 containerPort: 80,
                 hostPort: 80,
@@ -42,12 +42,12 @@ resource "aws_ecs_service" "ecs_service" {
   load_balancer {
     container_name = "nginx-container"
     container_port = 80
-    target_group_arn = aws_lb_target_group.ecs_publi_subnets.arn
+    target_group_arn = aws_lb_target_group.app_lb_target_group.arn
   }
   network_configuration {
     assign_public_ip = true
-    security_groups = [ aws_security_group.staging-sq.id ]
-    subnets = [ for item in local.public_subnet_ids : item ]
+    security_groups = var.lb_security_groups
+    subnets = var.lb_subnets
   }
 
  #lifecycle {
