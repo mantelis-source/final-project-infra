@@ -7,6 +7,9 @@ variable "vpc_id" {
 variable "lb_security_groups" {
   type = set(string)
 }
+variable "ecs_security_groups" {
+  type = set(string)
+}
 variable "lb_subnets" {
   type = set(string)
 }

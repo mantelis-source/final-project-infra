@@ -19,11 +19,11 @@ module "security_groups" {
   environment_name = var.environment_name  
 }
 
-module "alb" {
+module "instances" {
   source = "./instances"
   vpc_id = local.vpc_id
   environment_name = var.environment_name
   lb_security_groups = [ local.alb_sg_id ]
+  ecs_security_groups = [ local.ecs_sg_id ]
   lb_subnets = [ for subnet in local.public_subnets_ids : subnet ]
-
 }
