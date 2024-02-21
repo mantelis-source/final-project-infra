@@ -25,6 +25,8 @@ locals {
   private_subnets_ids = module.vpc_subnets.private_subnet_ids
   alb_sg_id = module.security_groups.alb_sg_id
   ecs_sg_id = module.security_groups.ecs_sg_id
+  db_subnet_group_name = module.vpc_subnets.db_subnets_group_name
+  db_sq_id = module.security_groups.db_sq_id
 }
 output "public_ids" {
   value = local.public_subnets_ids

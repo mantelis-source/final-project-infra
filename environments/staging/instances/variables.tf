@@ -10,8 +10,14 @@ variable "lb_security_groups" {
 variable "ecs_security_groups" {
   type = set(string)
 }
+variable "db_security_groups" {
+  type = set(string)
+}
 variable "lb_subnets" {
   type = set(string)
+}
+variable "db_subnet_group_name" {
+  type = string
 }
 
 locals {

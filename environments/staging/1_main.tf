@@ -26,4 +26,6 @@ module "instances" {
   lb_security_groups = [ local.alb_sg_id ]
   ecs_security_groups = [ local.ecs_sg_id ]
   lb_subnets = [ for subnet in local.public_subnets_ids : subnet ]
+  db_subnet_group_name = local.db_subnet_group_name
+  db_security_groups = [ local.db_sq_id ]
 }
