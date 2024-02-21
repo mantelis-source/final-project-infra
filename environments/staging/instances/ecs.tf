@@ -15,8 +15,8 @@ resource "aws_ecs_task_definition" "ecs_task_def" {
  
   container_definitions = jsonencode([
     {
-        name: "nginx-container",
-        image: "nginx:1.23.1",
+        name: "final-project",
+        image: "mantelis900726/final-project-image:latest",
         cpu: 256,
         memory: 1024,
         essential: true,
@@ -32,25 +32,21 @@ resource "aws_ecs_task_definition" "ecs_task_def" {
 }
 resource "aws_ecs_service" "ecs_service" {
   depends_on = [ aws_ecs_task_definition.ecs_task_def ]
-  name = "my-nginx-service"
+  name = "final-project-service"
   cluster = aws_ecs_cluster.ecs_cluster.id
   task_definition = aws_ecs_task_definition.ecs_task_def.arn
-  desired_count = 2
+  desired_count = 1
   launch_type = "FARGATE"
   platform_version = "1.4.0"
 
   load_balancer {
-    container_name = "nginx-container"
+    container_name = "final-project"
     container_port = 80
     target_group_arn = aws_lb_target_group.app_lb_target_group.arn
   }
   network_configuration {
-    assign_public_ip = false
+    assign_public_ip = true
     security_groups = var.ecs_security_groups
     subnets = var.lb_subnets
   }
-
- #lifecycle {
- #   ignore_changes = [ task_definition ]
- # }
 }
