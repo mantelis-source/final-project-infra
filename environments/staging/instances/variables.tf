@@ -1,6 +1,9 @@
 variable "environment_name" {
   type = string
 }
+variable "region" {
+  type = string
+}
 variable "vpc_id" {
   type = string
 }
@@ -19,7 +22,9 @@ variable "lb_subnets" {
 variable "db_subnet_group_name" {
   type = string
 }
-
+variable "log_group_name" {
+  type = string
+}
 locals {
   load_balancer_type = "application"
 }

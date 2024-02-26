@@ -1,32 +1,33 @@
 variable "environment_name" {
-  type = string
+  type    = string
   default = "Staging environment"
 }
 variable "vpc_cidr_range" {
-  type = string
+  type    = string
   default = "15.85.0.0/16"
 }
 variable "public_subnets" {
-  type = list(string)
+  type    = list(string)
   default = ["15.85.1.0/24", "15.85.2.0/24"]
 }
 variable "private_subnets" {
-  type = list(string)
+  type    = list(string)
   default = ["15.85.10.0/24", "15.85.11.0/24"]
 }
 variable "azs" {
-  type = list(string)
+  type    = list(string)
   default = ["eu-central-1a", "eu-central-1b"]
 }
 # Local variables
 locals {
-  vpc_id = module.vpc_subnets.vpc_id
-  public_subnets_ids = module.vpc_subnets.public_subnet_ids
-  private_subnets_ids = module.vpc_subnets.private_subnet_ids
-  alb_sg_id = module.security_groups.alb_sg_id
-  ecs_sg_id = module.security_groups.ecs_sg_id
+  vpc_id               = module.vpc_subnets.vpc_id
+  public_subnets_ids   = module.vpc_subnets.public_subnet_ids
+  private_subnets_ids  = module.vpc_subnets.private_subnet_ids
+  alb_sg_id            = module.security_groups.alb_sg_id
+  ecs_sg_id            = module.security_groups.ecs_sg_id
   db_subnet_group_name = module.vpc_subnets.db_subnets_group_name
-  db_sq_id = module.security_groups.db_sq_id
+  db_sq_id             = module.security_groups.db_sq_id
+  log_group_name       = "final-project"
 }
 output "public_ids" {
   value = local.public_subnets_ids
