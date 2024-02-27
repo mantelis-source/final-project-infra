@@ -65,7 +65,7 @@ resource "aws_route_table_association" "own_route_table_association" {
   route_table_id = aws_route_table.own_route_table.id
   subnet_id = aws_subnet.public-subnets[count.index].id
 }
-# Create private subnets group for
+# Create private subnets group for db
 resource "aws_db_subnet_group" "db_subnet_group" {
   depends_on = [ aws_subnet.private-subnets, data.aws_subnets.private_subnets ]
   name = "db_subnet_group"

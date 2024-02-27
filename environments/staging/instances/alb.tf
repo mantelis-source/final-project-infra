@@ -12,6 +12,9 @@ resource "aws_lb_target_group" "app_lb_target_group" {
   protocol    = "HTTP"
   vpc_id      = var.vpc_id
   target_type = "ip"
+  health_check {
+    path = "/login"
+  }
 }
 
 resource "aws_lb_listener" "alb_listener" {

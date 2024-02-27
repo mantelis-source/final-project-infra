@@ -12,14 +12,14 @@ resource "aws_ecs_task_definition" "ecs_task_def" {
   requires_compatibilities = ["FARGATE"]
   cpu                      = 512
   memory                   = 2048
-  execution_role_arn = "arn:aws:iam::744445457753:role/ecsTaskExecutionRole"
+  execution_role_arn       = "arn:aws:iam::744445457753:role/ecsTaskExecutionRole"
 
   container_definitions = jsonencode([
     {
       name : "final-project-container",
       image : "mantelis900726/final-project-image:latest",
-      repositoryCredentials: {
-            "credentialsParameter": "arn:aws:secretsmanager:eu-central-1:744445457753:secret:github_creds-2GliDQ"
+      repositoryCredentials : {
+        "credentialsParameter" : "arn:aws:secretsmanager:eu-central-1:744445457753:secret:github_creds-2GliDQ"
       }
       cpu : 512,
       memory : 2048,
@@ -31,35 +31,35 @@ resource "aws_ecs_task_definition" "ecs_task_def" {
           protocol : "tcp"
         }
       ],
-      secrets: [
+      secrets : [
         {
-          valueFrom: "arn:aws:secretsmanager:eu-central-1:744445457753:secret:db_creds-5aPXeO:db_username::"
-          name: "db_username"
+          valueFrom : "arn:aws:secretsmanager:eu-central-1:744445457753:secret:db_creds-5aPXeO:db_username::"
+          name : "db_username"
         },
         {
-          valueFrom: "arn:aws:secretsmanager:eu-central-1:744445457753:secret:db_creds-5aPXeO:db_password::"
-          name: "db_password"
+          valueFrom : "arn:aws:secretsmanager:eu-central-1:744445457753:secret:db_creds-5aPXeO:db_password::"
+          name : "db_password"
         },
         {
-          valueFrom: "arn:aws:secretsmanager:eu-central-1:744445457753:secret:db_creds-5aPXeO:db_host::"
-          name: "db_host"
+          valueFrom : "arn:aws:secretsmanager:eu-central-1:744445457753:secret:db_creds-5aPXeO:db_host::"
+          name : "db_host"
         },
         {
-          valueFrom: "arn:aws:secretsmanager:eu-central-1:744445457753:secret:db_creds-5aPXeO:db_name::"
-          name: "db_name"
+          valueFrom : "arn:aws:secretsmanager:eu-central-1:744445457753:secret:db_creds-5aPXeO:db_name::"
+          name : "db_name"
         },
         {
-          valueFrom: "arn:aws:secretsmanager:eu-central-1:744445457753:secret:db_creds-5aPXeO:flask_secret_key::"
-          name: "flask_secret_key"
+          valueFrom : "arn:aws:secretsmanager:eu-central-1:744445457753:secret:db_creds-5aPXeO:flask_secret_key::"
+          name : "flask_secret_key"
         }
       ],
-      logConfiguration: {
-        logDriver: "awslogs",
-        options: {
+      logConfiguration : {
+        logDriver : "awslogs",
+        options : {
           //awslogs-create-group: "true",
-          awslogs-group: var.log_group_name,
-          awslogs-region: var.region,
-          awslogs-stream-prefix: var.environment_name
+          awslogs-group : var.log_group_name,
+          awslogs-region : var.region,
+          awslogs-stream-prefix : var.environment_name
         }
       }
     }

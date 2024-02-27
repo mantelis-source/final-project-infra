@@ -19,7 +19,7 @@ module "security_groups" {
   environment_name = var.environment_name
 }
 module "logs" {
-  source = "./logs"
+  source         = "./logs"
   log_group_name = local.log_group_name
 }
 module "instances" {
