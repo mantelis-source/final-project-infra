@@ -28,6 +28,7 @@ jobs:
               run: |
                 terraform fmt
                 terraform init
+                pwd
             
             - name: 'Apply infrastructure'
               working-directory: ./environments/staging
