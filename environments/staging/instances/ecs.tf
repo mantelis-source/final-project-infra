@@ -21,8 +21,8 @@ resource "aws_ecs_task_definition" "ecs_task_def" {
       repositoryCredentials : {
         "credentialsParameter" : "arn:aws:secretsmanager:eu-central-1:744445457753:secret:github_creds-2GliDQ"
       }
-      cpu : 512,
-      memory : 2048,
+      cpu : 256,
+      memory : 1024,
       essential : true,
       portMappings : [
         {
