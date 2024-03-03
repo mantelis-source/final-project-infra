@@ -2,8 +2,6 @@ provider "aws" {
   #  shared_config_files      = ["/home/mantas/.aws/config"]
   #  shared_credentials_files = ["/home/mantas/.aws/credentials"]
   #  profile                  = "default"
-  access_key = "$AWS_ACCESS_KEY_ID"
-  secret_key = "$AWS_SECRET_ACCESS_KEY"
   region     = "eu-central-1"
 }
 module "vpc_subnets" {
