@@ -31,4 +31,4 @@ jobs:
             
             - name: 'Apply infrastructure'
               working-directory: ./environments/staging
-              run: terraform apply -auto-approve
+              run: terraform plan
