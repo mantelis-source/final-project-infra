@@ -23,12 +23,12 @@ jobs:
             - name: 'Setup Terraform'
               uses: hashicorp/setup-terraform@v2
 
-            - name: 'Init Terraform'
+            - name: 'Init. Terraform'
               working-directory: ./environments/staging
               run: |
                 terraform fmt
                 terraform init
             
-           # - name: 'Apply infrastructure'
-            #  working-directory: ./environments/staging
-              #run: terraform apply -auto-approve
+            - name: 'Apply infrastructure'
+              working-directory: ./environments/staging
+              run: terraform apply
